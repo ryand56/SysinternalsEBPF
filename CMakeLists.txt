@@ -90,20 +90,6 @@ add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/${SYSEBPF_COMPRESS_MAN}
 #
 add_compile_options(-Wall -Werror -g -D_FORTIFY_SOURCE=2 -fstack-protector-all -O2)
 
-include(ExternalProject)
-
-# Fetch libbpf
-# FIX this so that it clones libbpf when the project is cloned
-ExternalProject_Add(libbpf
-    GIT_REPOSITORY https://github.com/libbpf/libbpf.git
-#    GIT_TAG master
-    GIT_TAG v1.1.0
-    PREFIX ./libbpf
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND cd ../libbpf/src && bash -c "CFLAGS=\"-g -O2 -Werror -Wall -fPIC\" make"
-    INSTALL_COMMAND ""
-    )
-
 set(libbpf_SOURCE_DIR ${CMAKE_BINARY_DIR}/libbpf/src/libbpf)
 
 find_package(PkgConfig REQUIRED)
